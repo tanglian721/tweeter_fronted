@@ -4,8 +4,16 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {}
-});
+    state: {
+        defaultList: []
+    },
+    mutations: {},
+    actions: {},
+    modules: {},
+    getters: {
+        showTweets: state => {
+            console.log(state.defaultList)
+            return state.defaultList;
+        }
+    }
+})
