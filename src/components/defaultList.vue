@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import singleTweet from "./singleTweet.vue";
 export default {
   components: { singleTweet },
@@ -26,31 +26,13 @@ export default {
     },
   },
   methods: {
-    getTweets() {
-      axios
-        .request({
-          url: "http://127.0.0.1:5000/tweets",
-          method: "get",
-          params: {
-            checkuserId: this.userId,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          this.$store.state.defaultList = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
   },
   computed: {
     tweets() {
-      return this.$store.getters.showTweets;
+      return this.$store.state.defaultList;
     },
   },
   mounted () {
-      this.getTweets()
   },
 };
 </script>

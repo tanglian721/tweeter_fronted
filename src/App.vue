@@ -10,29 +10,29 @@
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@500&family=Lora&family=Roboto:wght@500&display=swap');
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css);
 * {
   margin: 0;
   padding:0;;
 }
-body,html{
-  height: auto;
-}
+// body,html{
+//   box-sizing: border-box;
+//   height: 98vh;
+//   box-sizing: border-box;
+// }
 #app{
   width: 100vw;
-  height: auto;
+  height: 100vh;
   overflow: hidden;
 }
 
-#nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+button{
+  background-color: #00ffe1;
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: white;
+  border:none;
+  filter: drop-shadow(0px 0px 5px gray);
 }
 </style>
