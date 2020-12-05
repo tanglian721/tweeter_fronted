@@ -1,13 +1,20 @@
 <template>
   <div id="homepage">
     <div class="login">
-      <user-info v-if="this.$store.state.infoAppear" />
-      <top-bar @refresh="refresh" />
+      <transition
+        enter-active-class="animate__animated animate__slideInLeft"
+        leave-active-class="animate__animated animate__slideOutLeft"
+      >
+        <user-info class="mobile" v-if="this.$store.state.infoAppear" />
+      </transition>
+      <user-info class="desktop" />
+      <top-bar class="mobile" @refresh="refresh" />
       <div id="body">
-        <img v-if="loading_top" src="../assets/loading.gif" alt="">
+        <img v-if="loading_top" src="../assets/loading.gif" alt="" />
         <default-list
           id="scroll"
           v-if="$store.state.homepageContentShift == 'default'"
+          @mousewheel="ssss"
         />
         <message-view
           v-else-if="$store.state.homepageContentShift == 'message'"
@@ -16,11 +23,20 @@
         <hash-tag-list
           v-else-if="$store.state.homepageContentShift == 'hash'"
         />
-        <img v-if="loading_bottom" src="../assets/loading.gif" alt="">
+        <img v-if="loading_bottom" src="../assets/loading.gif" alt="" />
       </div>
       <!-- <tweets-like-sorting v-else-if="$store.state.homepageContentShift == 'byLike'" /> -->
-      <bottom-bar />
-      <tweet-new v-if="ifnew" />
+      <div class="right desktop">
+        <hash-tag-list />
+        <message-view />
+      </div>
+      <bottom-bar class="mobile" />
+      <transition
+        enter-active-class="animate__animated animate__zoomIn"
+        leave-active-class="animate__animated animate__zoomOut"
+      >
+        <tweet-new v-if="ifnew" />
+      </transition>
       <button-newtweet v-if="this.$store.state.newbtn" />
     </div>
     <!-- <div v-else class="unlogin">login</div> -->
@@ -48,7 +64,7 @@ export default {
       ifLoading: true,
       user: cookies.get("user"),
       loading_top: false,
-      loading_bottom: false
+      loading_bottom: false,
     };
   },
   components: {
@@ -68,7 +84,7 @@ export default {
       this.getTweets();
     },
     getTweets() {
-      this.loading_top = true
+      this.loading_top = true;
       axios
         .request({
           url: "https://ltweet.tk/api/tweets",
@@ -80,14 +96,14 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.$store.state.defaultList = response.data;
-          this.loading_top = false
+          this.loading_top = false;
         })
         .catch((error) => {
           console.log(error);
         });
     },
     loadMore() {
-      this.loading_bottom = true
+      this.loading_bottom = true;
       this.ifLoading = false;
       axios
         .request({
@@ -104,7 +120,7 @@ export default {
           console.log(response.data);
           if (response.data.length < 1) {
             console.log("to the end");
-            this.loading_bottom = false
+            this.loading_bottom = false;
           } else {
             this.$store.state.defaultList = this.$store.state.defaultList.concat(
               response.data
@@ -112,7 +128,7 @@ export default {
             setTimeout(() => {
               this.ifLoading = true;
             }, 1000);
-            this.loading_bottom = false
+            this.loading_bottom = false;
           }
         })
         .catch((error) => {
@@ -220,6 +236,10 @@ export default {
           console.log(error);
         });
     },
+    ssss(event) {
+      console.log("aa");
+      console.log(event);
+    },
   },
   computed: {
     ifnew() {
@@ -238,13 +258,20 @@ export default {
     this.getAtUserTweet();
     this.getHashList();
     this.getUsers();
+    // let div1 = document.body;
+    //   div1.addEventListener("wheel", () => {
+    //     console.log(div1.scrollHeight)
+    //     console.log(div1.scrollTop)
+    //     console.log(div1.offsetTop)
+    //   })
+
     if (this.$store.state.homepageContentShift == "default") {
       let div = document.getElementById("body");
       div.addEventListener("wheel", () => {
         // console.log(div.scrollHeight)
         // console.log(div.scrollTop)
         // console.log(div.offsetTop)
-        if (div.scrollHeight <= div.scrollTop + div.offsetTop * 8) {
+        if (div.scrollHeight <= div.scrollTop + div.offsetTop * 9) {
           if (this.ifLoading == true) {
             this.loadMore();
           }
@@ -256,6 +283,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 #homepage {
   box-sizing: border-box;
   width: 100vw;
@@ -286,18 +314,18 @@ export default {
       overflow-x: hidden;
       display: grid;
       justify-items: center;
-      >img{
-        height:10vh;
-    .default-list,
-    .at-user,
-    .hash,
-    .message,
-    .tweet-sort-like {
-      box-sizing: border-box;
-      width: 100%;
-      overflow-x: hidden;
-    }
-      };
+      > img {
+        height: 10vh;
+        .default-list,
+        .at-user,
+        .hash,
+        .message,
+        .tweet-sort-like {
+          box-sizing: border-box;
+          width: 100%;
+          overflow-x: hidden;
+        }
+      }
     }
     .bottom-bar {
       box-sizing: border-box;
@@ -308,5 +336,57 @@ export default {
       overflow: hidden;
     }
   }
+  .desktop {
+  display: none;
 }
+}
+@media only screen and (min-width: 1280px) {
+  .mobile {
+    display: none;
+  }
+  #homepage {
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    .login {
+      position: relative;
+      grid-template-rows: 1fr;
+      grid-template-columns: 2fr 5fr 3fr;
+
+      .user-info {
+        position: relative;
+        background-color: rgb(255, 255, 255);
+      }
+      #body {
+        box-sizing: border-box;
+        width: 100%;
+        overflow-x: hidden;
+        display: grid;
+        justify-items: center;
+        > img {
+          height: 10vh;
+        }
+          .default-list,
+          .at-user,
+          .hash,
+          .message,
+          .tweet-sort-like {
+            box-sizing: border-box;
+            width: 100%;
+            overflow-x: hidden;
+          }
+      }
+    }
+     .desktop{
+    display: block;
+  }
+  }
+ 
+}
+.right {
+  display: grid;
+  grid-template-rows: 2fr 3fr;
+}
+
 </style>

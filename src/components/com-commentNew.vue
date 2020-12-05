@@ -5,7 +5,7 @@
       <div v-else-if="status == 'success'" id="success"></div>
       <div v-else id="edit">
         <img :src="user.url" alt="" />
-        <div>
+        <div id="area">
           <textarea
             name=""
             id=""
@@ -22,7 +22,7 @@
 
 <script>
 import cookies from "vue-cookies";
-import axios from "axios"
+import axios from "axios";
 export default {
   data() {
     return {
@@ -57,7 +57,7 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
-          this.$emit("newcomment", response.data)
+          this.$emit("newcomment", response.data);
         })
         .catch((errorMessage) => {
           this.submit = false;
@@ -80,5 +80,31 @@ export default {
     height: 3vh;
     border-radius: 50%;
   }
+}
+
+@media only screen and (min-width: 1280px) {
+  #edit {
+    width: 80%;
+    margin-left: 20%;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    justify-items: center;
+    column-gap: 0;
+    > img {
+      width: 2vw;
+      height: 2vw;
+      border-radius: 50%;
+    }
+    #area {
+      textarea {
+        width: 100%;
+      }
+    }
+  }
+  button {
+  font-size: 0.7rem;
+  position: relative;
+  left: 13vw;
+}
 }
 </style>

@@ -256,4 +256,100 @@ export default {
     }
   }
 }
+@media only screen and (min-width: 1280px) {
+  .single-nestcomment {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  margin-top: 2vh;
+  width: 80%;
+  margin-left: 20%;
+  .userimg {
+    width: 80%;
+    justify-self: end;
+    position: relative;
+    > img {
+      width: 2vw;
+      height: 2vw;
+      border-radius: 50%;
+    }
+    .new {
+    
+      left: 1.5vw;
+    }
+  }
+  .commentarea {
+    box-sizing: border-box;
+    justify-self: center;
+    width: 90%;
+    // border: 1px solid black;
+    padding: 1vw;
+    .comment-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      .username {
+        font-size: 0.8rem;
+        font-family: "Catamaran", sans-serif;
+      }
+      .comment-time {
+        text-align: right;
+        font-size: 0.5rem;
+        font-family: "Lora", serif;
+      }
+    }
+    .comment-content {
+      border-top: 1px solid #f5f5f5;
+      margin-top: 1vh;
+      .comment-text {
+        font-size: 0.7rem;
+        font-family: "Catamaran", sans-serif;
+      }
+      .comment-img {
+        width: 90%;
+        margin-left: 5%;
+        > img {
+          width: 100%;
+        }
+      }
+      .comment-bar {
+        box-sizing: border-box;
+        border-top: 1px solid #f5f5f5;
+        padding-top: 1vh;
+        margin-top: 1vh;
+        width: 100%;
+        height: 5vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr ;
+        .bar {
+          position: relative;
+          width: 90%;
+          display: grid;
+          grid-template-columns: auto auto;
+          height: 50%;
+          img {
+            margin-left: 2.2vw;
+            height: 1.6vh;
+          }
+          span {
+            font-size: 0.8rem;
+          }
+          .icon-div {
+            display: inline;
+            height: 100%;
+          }
+          .new {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.733);
+            position: absolute;
+            left: 25px;
+            top: -0.5vh;
+          }
+        }
+      }
+    }
+  }
+}
+}
 </style>

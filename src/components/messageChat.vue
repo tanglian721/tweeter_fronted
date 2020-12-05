@@ -145,4 +145,73 @@ export default {
     }
   }
 }
+@media only screen and (min-width: 1280px) {
+.message-chat {
+  box-sizing: border-box;
+  width: 90%;
+  margin-left: 5%;
+  .time {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  img {
+    height: 6vh;
+    border-radius: 50%;
+  }
+  .chat {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    justify-items: center;
+    .chatwith {
+      position: relative;
+      #new {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+    .content {
+      width: 90%;
+      height: 6vh;
+      background-color: #fff;
+      border-radius: 15px;
+      #user {
+        text-align: right;
+        position: relative;
+        padding-right: 3vw;
+        &::after {
+          content: "";
+          border: 15px solid rgba(252, 0, 0, 0);
+          width: 0;
+          height: 0;
+          // background-color: #fff;
+          border-left: 15px solid rgb(255, 255, 255);
+          position: absolute;
+          top: 0.9vh;
+          right: -25px;
+        }
+      }
+      #chatuser {
+        text-align: left;
+        padding-left: 2vw;
+        position: relative;
+        &::before {
+          content: "";
+          border: 15px solid rgba(255, 31, 31, 0);
+          width: 0;
+          height: 0;
+          border-right: 15px solid rgb(255, 255, 255);
+          position: absolute;
+          left: -25px;
+          top: 0.9vh;
+        }
+      }
+    }
+  }
+}
+}
 </style>

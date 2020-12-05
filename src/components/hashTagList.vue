@@ -24,9 +24,7 @@ import hashtag from "./hashtag.vue";
 export default {
   components: { hashtag },
   data() {
-    return {
-      hashList: this.$store.state.hashList,
-    };
+    return {};
   },
   props: {
     tag: {
@@ -34,6 +32,11 @@ export default {
     },
     num: {
       type: Number,
+    },
+  },
+  computed: {
+    hashList() {
+      return this.$store.state.hashList;
     },
   },
 };
@@ -62,7 +65,26 @@ export default {
     .hashtags {
       display: grid;
       row-gap: 1vh;
-
+    }
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .hash {
+    h2 {
+      font-size: 1.5rem;
+    }
+    .hashlist {
+      .fire {
+        height: 4vh;
+        .icon {
+          box-sizing: border-box;
+          height: 4.5vh;
+        }
+      }
+      .hashtags {
+        display: grid;
+        row-gap: 1vh;
+      }
     }
   }
 }

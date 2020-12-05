@@ -22,12 +22,20 @@ export default {
 
 <style lang="scss" scoped>
 .create-new {
+  z-index: 200;
     position: fixed;
     top: 80vh;
-    right: 10vw;
+    right: 15vw;
   #createBtn {
     height: clamp(40px, 15vw, 80px);
     filter: drop-shadow(2px 2px 5px gray);
   }
 }
+@media only screen and (min-width: 1280px) {
+  .create-new {
+  z-index: 200;
+    position: fixed;
+    top: 80vh;
+    left: 15vw;
+}}
 </style>

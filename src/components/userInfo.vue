@@ -8,12 +8,14 @@
         <p id="birthday">{{ user.birthdate }}</p>
         <p id="follow">
           <span id="following">Following : {{ following }}</span>
+          <br class="desktop" />
           <span id="follower"> Follower : {{ follower }}</span>
           <span class="new" v-if="this.$store.getters.newFollower == 1"></span>
         </p>
         <p id="bio">{{ user.bio }}</p>
       </div>
-      <userinfor-btn-m />
+      <userinfor-btn-m class="mobile" />
+      <userinfor-btn-d class="desktop" />
       <span id="logout" @click="logout">Logout</span>
     </div>
   </div>
@@ -22,8 +24,9 @@
 <script>
 import cookies from "vue-cookies";
 import userinforBtnM from "./userinforBtnM.vue";
+import UserinforBtnD from "./userinforBtnD.vue";
 export default {
-  components: { userinforBtnM },
+  components: { userinforBtnM, UserinforBtnD },
   data() {
     return {
       user: cookies.get("user"),
@@ -48,6 +51,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.desktop{
+  display: none;
+}
 .user-info {
   box-sizing: border-box;
   overflow: hidden;
@@ -110,6 +116,46 @@ export default {
       margin-left: 40vw;
       bottom: 6vh;
       filter: drop-shadow(2px 2px 5px gray);
+    }
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .mobile {
+    display: none;
+  }
+  .userinfoBtnD {
+    display: grid;
+  }
+  .user-info {
+    .user-area {
+      width: 100%;
+
+      #userImg {
+        width: 8vw;
+        height: 8vw;
+        left: 5vw;
+        top: 3vh;
+        margin-bottom: 3vh;
+      }
+
+      .UIBM {
+        width: 80%;
+        margin-top: 5vh;
+        padding-left: 10%;
+      }
+
+      #logout {
+        position: absolute;
+        background-color: #b2f7ef;
+        border: none;
+        width: 5vw;
+        color: white;
+        padding: 0.4rem;
+        border-radius: 04rem;
+        margin-left: 10vw;
+        bottom: 6vh;
+        filter: drop-shadow(2px 2px 5px gray);
+      }
     }
   }
 }

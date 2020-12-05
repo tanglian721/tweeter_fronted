@@ -55,7 +55,19 @@ export default {
   column-gap: 2vw;
   height: 4vh;
   position: fixed;
+
   bottom: 12vh;
  
+}
+@media only screen and (min-width: 1280px) {
+.new-message {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  column-gap: 1vw;
+  height: 4vh;
+  position: fixed;
+  bottom: 2vh;
+ 
+}
 }
 </style>

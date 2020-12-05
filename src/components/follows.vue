@@ -76,4 +76,54 @@ export default {
     justify-self: end;
   }
 }
+@media only screen and (min-width: 1280px) {
+  .follows {
+  box-sizing: border-box;
+  width: 90%;
+  margin-top: 2vh;
+  margin-left: 5%;
+  //   background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+  align-items: center;
+  border: 1px solid bisque;
+  border-radius: 30px;
+  box-shadow: 0 0 15px wheat;
+  padding: 20px 30px;
+  position: relative;
+  > img {
+    height: 3vw;
+    width: 3vw;
+    border-radius: 50%;
+  }
+  .new {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    border-radius: 50%;
+    top: 0;
+    left: 2vh;
+  }
+  .content {
+    margin-left: 1vw;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+      font-size: 0.9rem;
+    .top {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      .email {
+        font-size: 0.8rem;
+        margin-left: 2vw;
+      }
+    }
+  }
+
+  #follow {
+    justify-self: end;
+  }
+}
+}
 </style>

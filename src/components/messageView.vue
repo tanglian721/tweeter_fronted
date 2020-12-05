@@ -14,8 +14,15 @@
         <img src="../assets/left-arrow.png" alt="" />
         <span id="messageName">{{ chatwith.chatwith }}</span>
       </div>
-      <message-chat v-for="chat in chats" :key="chat.id" :chat="chat" @read="read"/>
-      <message-new :receiver="chatwith" @newMessage="newMessage"/>
+      <div class="chat-area">
+        <message-chat
+          v-for="chat in chats"
+          :key="chat.id"
+          :chat="chat"
+          @read="read"
+        />
+      </div>
+      <message-new :receiver="chatwith" @newMessage="newMessage" />
     </div>
   </div>
 </template>
@@ -31,7 +38,7 @@ export default {
   data() {
     return {
       MessageChatListuser: cookies.get("user"),
-      chatList: this.$store.state.chatList,
+
       chats: "",
       chatwith: "",
     };
@@ -43,9 +50,9 @@ export default {
     chat: {
       type: Object,
     },
-    receiver:{
-        type: Object,
-    }
+    receiver: {
+      type: Object,
+    },
   },
   methods: {
     tochat(data) {
@@ -60,7 +67,7 @@ export default {
         })
         .then((response) => {
           this.chats = response.data;
-          console.log(this.chats)
+          console.log(this.chats);
           this.chatwith = data;
           this.$store.state.messageShift = "message";
         })
@@ -71,34 +78,40 @@ export default {
     backtolist() {
       this.$store.state.messageShift = "chatlist";
     },
-    newMessage(data){
-        this.chats.unshift(data)
+    newMessage(data) {
+      this.chats.unshift(data);
     },
-    read(){
-        console.log(this.chatwith)
-        for (let i = 0; i < this.chatList.length; i++){
-            if(this.chatList[i].chatId == this.chatwith.chatId){
-                this.$set(this.chatList[i], 'new', 0)
-            }
+    read() {
+      console.log(this.chatwith);
+      for (let i = 0; i < this.chatList.length; i++) {
+        if (this.chatList[i].chatId == this.chatwith.chatId) {
+          this.$set(this.chatList[i], "new", 0);
         }
-    }
+      }
+    },
+  },
+  computed: {
+    chatList() {
+      return this.$store.state.chatList;
+    },
   },
   mounted() {
-
-    console.log(this.$store.state.newchat)
-    for (let i = 0; i < this.chatList.length; i++){
-      if(this.chatList[i].chatId == this.$store.state.newchat.chatId){
-        this.chatwith =  this.chatList[i]
+    console.log(this.chatList);
+    for (let i = 0; i < this.chatList.length; i++) {
+      if (this.chatList[i].chatId == this.$store.state.newchat.chatId) {
+        this.chatwith = this.chatList[i];
       } else {
-        this.chatwith = this.$store.state.newchat
-        }    }
+        this.chatwith = this.$store.state.newchat;
+      }
+    }
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .message {
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
   h2 {
     text-align: center;
     margin: 2vh 0;
@@ -106,11 +119,12 @@ export default {
   }
   .usersMessage {
     width: 90%;
+    position: relative;
     #chatname {
-      height: 6vh;
-      margin: 5vw;
+      height: 1.5rem;
+      margin: 1.5vw;
       #messageName {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-family: "Catamaran", sans-serif;
         margin-left: 2vw;
         line-height: 8vh;
@@ -119,10 +133,24 @@ export default {
         height: 50%;
       }
     }
+    .chat-area{
+      margin-top: 5vh;
+      margin-left: 2vw;
+      height: 40vh;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      
+    }
     .new-message {
       width: 80%;
-      margin-left: 10%;
+      margin-left: 3vw;
     }
   }
+}
+@media only screen and (min-width: 1280px) {
+  .new-message {
+      width: 25vw;
+      margin-left: 3vw;
+    }
 }
 </style>

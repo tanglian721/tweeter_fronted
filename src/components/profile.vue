@@ -1,7 +1,7 @@
 <template>
   <div class="profile-view">
     <img id="userImg" :src="user.url" alt="" />
-    <span id="editBtn" @click="edit = !edit"> Edit Profile </span>
+    <span id="editBtn" @click="ifedit"> Edit Profile </span>
     <div id="userInfo">
       <p id="user">
         Username:
@@ -27,6 +27,21 @@
         <span id="following">following : 2</span>
         <span id="follower"> follower :4</span>
       </p>
+      <div class="icon" v-if="edit">
+        <input
+          type="file"
+          accept="image/*"
+          @change="onchange"
+          id="file-input"
+        />
+        <br />
+        <div id="url-input">
+          <span>URL: </span><input type="text" v-model="url" />
+        </div>
+        <br />
+        <img class="prewiew" v-if="url" :src="url" />
+        <br />
+      </div>
       <!-- <portrait-set v-if="edit" id="portrait-set"></portrait-set> -->
     </div>
     <span id="submit" v-if="edit" @click="editProfile">Submit</span>
@@ -65,6 +80,26 @@ export default {
     };
   },
   methods: {
+    ifedit() {
+      console.log(this.edit);
+      this.edit = !this.edit;
+    },
+    onchange(e) {
+      const file = e.target.files[0];
+      console.log(file.name);
+      let formData = new FormData();
+      formData.set("file", file);
+      axios
+        .post("https://ltweet.tk/api/upload", formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          this.url = "https://ltweet.tk/img/" + file.name;
+        });
+    },
     editProfile() {
       axios
         .request({
@@ -80,7 +115,7 @@ export default {
             birthdate: this.birthdate,
             bio: this.bio,
             url: this.url,
-            userId:this.user.user_id
+            userId: this.user.user_id,
           },
         })
         .then((response) => {
@@ -95,6 +130,30 @@ export default {
     inputPassword() {
       this.deleteShow = "password";
     },
+    deleteUser() {
+      axios
+        .request({
+          url: "https://ltweet.tk/api/users",
+          method: "delete",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            loginToken: cookies.get("loginToken"),
+            password: this.password,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          cookies.remove("user");
+          cookies.remove("loginToken");
+          this.$router.push("/login");
+          this.deleteFalse == "success";
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -106,7 +165,7 @@ export default {
     width: 25vw;
     position: relative;
     top: -13vw;
-    left: 5vw;
+    left: 10vw;
     border-radius: 50%;
   }
 
@@ -187,5 +246,10 @@ export default {
       }
     }
   }
+}
+.prewiew {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
 }
 </style>

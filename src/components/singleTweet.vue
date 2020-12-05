@@ -1,7 +1,13 @@
 <template>
   <div class="single-tweet">
-    <div class="userimg" @mouseover="card" @mouseleave="hideCard">
-      <img :src="tweet.url" alt="" @click="touser" />
+    <div class="userimg">
+      <img
+        :src="tweet.url"
+        alt=""
+        @click="touser"
+        @mouseover="card"
+        @mouseleave="hideCard"
+      />
       <transition
         class="my-element"
         enter-active-class="animate__animated animate__fadeIn"
@@ -62,13 +68,14 @@
           <tweet-retweet :tweet="tweet" />
         </div>
         <div class="bar edit" v-if="ifuser">
-          <tweetedit :tweet="tweet" />
+          <img src="../assets/edit.png" @click="ifedit = !ifedit" />
         </div>
         <div class="bar delete" v-if="ifuser">
           <tweetdelete :tweet="tweet" />
         </div>
       </div>
       <tweet-like :tweet="tweet" v-if="ifuser" :like="user" />
+      <tweetedit v-if="ifedit" :tweet="tweet" @editSuccess="editSuccess"/>
       <div class="comment-area" v-if="ifcomment">
         <h4 id="comments">COMMENTS:</h4>
         <comment-new :tweet="tweet" @newcomment="newcomment" />
@@ -114,6 +121,7 @@ export default {
       user: {},
       ifAtNew: false,
       ifcard: false,
+      ifedit:false
     };
   },
   props: {
@@ -239,6 +247,10 @@ export default {
     hideCard() {
       this.ifcard = false;
     },
+    editSuccess(data) {
+      console.log(data)
+      this.ifedit = false
+    }
   },
   computed: {
     ifretweet() {
@@ -270,7 +282,9 @@ export default {
   grid-template-columns: 1fr 7fr;
   margin-top: 2vh;
   width: 100%;
+  position: relative;
   .userimg {
+    position: relative;
     width: 80%;
     margin-top: 1vh;
     justify-self: end;
@@ -293,6 +307,7 @@ export default {
     }
   }
   .tweetarea {
+    position: relative;
     box-sizing: border-box;
     justify-self: center;
     width: 90%;
@@ -334,6 +349,7 @@ export default {
       }
     }
     .tweet-bar {
+      position: relative;
       box-sizing: border-box;
       border-top: 1px solid #f5f5f5;
       padding-top: 1vh;
@@ -370,14 +386,18 @@ export default {
           top: -0.5vh;
         }
       }
+      .edit {
+        z-index: 100;
+        width: 100%;
+      }
     }
-    .comment-area{
+    .comment-area {
       box-sizing: border-box;
       border: 1px solid #f5f5f5;
       border-radius: 10px;
       padding: 10px;
-      #comments{
-        margin:2vh 0;
+      #comments {
+        margin: 2vh 0;
       }
     }
   }
@@ -385,5 +405,104 @@ export default {
 .animate__animated.animate__fadeIn {
   --animate-delay: 3s;
   --animate-duration: 2s;
+}
+@media only screen and (min-width: 1280px) {
+  .single-tweet {
+    width: 90%;
+    margin-left: 5%;
+    .userimg {
+      > img {
+        width: 4vw;
+        height: 4vw;
+      }
+      // .atNew {
+      //   .ifnewAtNew {
+      //     width: 10px;
+      //     height: 10px;
+      //     border-radius: 50%;
+      //     background-color: rgba(255, 0, 0, 0.733);
+      //     position: absolute;
+      //     right: 0px;
+      //     top: -0.5vh;
+      //   }
+      // }
+    }
+    .tweetarea {
+      padding: 30px;
+      .tweet-top {
+        .username {
+          font-size: 1.5rem;
+        }
+        .tweet-time {
+          font-size: 0.8rem;
+        }
+        border-bottom: 1px solid #f5f5f5;
+      }
+      .tweet-content {
+        margin-top: 1vh;
+        .tweet-text {
+          font-size: 1rem;
+          font-family: "Catamaran", sans-serif;
+        }
+        .tweet-img {
+          width: 90%;
+          margin-left: 5%;
+          > img {
+            width: 100%;
+            max-height: 30vh;
+            object-fit: contain;
+            border-radius: 20px;
+          }
+        }
+      }
+      .tweet-bar {
+        box-sizing: border-box;
+        border-top: 1px solid #f5f5f5;
+        padding-top: 1vh;
+        margin-top: 1vh;
+        width: 100%;
+        height: 5vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        #retweeticon {
+          margin-left: 2.5vw;
+          height: 2.5vh;
+        }
+        .bar {
+          position: relative;
+          width: 90%;
+          display: grid;
+          grid-template-columns: auto auto;
+          height: 50%;
+          span {
+            font-size: 1rem;
+          }
+          img {
+            margin-left: 2vw;
+            height: 2vh;
+          }
+
+          .new {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgba(255, 0, 0, 0.733);
+            position: absolute;
+            right: 4vw;
+            top: -0.5vh;
+          }
+        }
+      }
+      .comment-area {
+        box-sizing: border-box;
+        border: 1px solid #f5f5f5;
+        border-radius: 10px;
+        padding: 10px;
+        #comments {
+          margin: 2vh 0;
+        }
+      }
+    }
+  }
 }
 </style>

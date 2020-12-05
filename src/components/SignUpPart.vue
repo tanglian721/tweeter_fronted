@@ -31,6 +31,8 @@
 
 <script>
 import FormData from "form-data";
+import cookies from "vue-cookies"
+
 import axios from "axios";
 export default {
   name: "sign-up-part",
@@ -83,6 +85,9 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          cookies.set("loginToken", response.data.loginToken);
+          cookies.set("user", response.data);
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log(error);
@@ -135,24 +140,55 @@ export default {
     #signUpBtn,
     #back {
       margin: 0 5vw;
-    }
-
-    @media only screen and (min-width: 768px) {
-      input {
-        height: 1rem;
-        width: 250px;
-      }
-
-      textarea {
-        width: 255px;
-      }
-    }
-  }
+    }}
 }
 #url-input {
   width: 80%;
   display: grid;
   grid-template-columns: 1fr 8fr;
   column-gap: 2vw;
+}
+@media only screen and (min-width: 1280px) {
+ .sign-up {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  .bg {
+    box-sizing: border-box;
+    width: 50%;
+    position: absolute;
+    border: 1px solid gray;
+    padding: 5vw;
+    background-color: white;
+    border-radius: 5vw;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    filter: drop-shadow(10px 10px 15px gray);
+
+    h3 {
+      margin-bottom: 2vh;
+    }
+
+    input,
+    textarea {
+      width: 80%;
+    }
+    .prewiew {
+      width: 30vw;
+      height: 30vw;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    #signUpBtn,
+    #back {
+      margin: 0 5vw;
+    }
+  }}
 }
 </style>

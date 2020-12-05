@@ -338,4 +338,94 @@ export default {
     }
   }
 }
+@media only screen and (min-width: 1280px) {
+  .single-comment {
+  // display: grid;
+  // grid-template-columns: 1fr 7fr;
+  // margin-top: 2vh;
+  // border: 1px solid #f5f5f5;
+  // border-radius: 10px;
+  // filter: drop-shadow(1px 1px 5px rgba(255, 255, 255, 0.479));
+
+  // width: 100%;
+  .userimg {
+    // width: 80%;
+    // justify-self: end;
+    > img {
+      width: 3vw;
+      height: 3vw;
+    }
+    .new {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background-color: red;
+      border-radius: 50%;
+      top: 0;
+      left: 4vw;
+    }
+  }
+  .commentarea {
+    box-sizing: border-box;
+    justify-self: center;
+    width: 90%;
+    // border: 1px solid black;
+    padding: 1vw;
+    .comment-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      .username {
+        font-size: 1rem;
+      }
+      .comment-time {
+        font-size: 0.8rem;
+      }
+    }
+    .comment-content {
+      .comment-text {
+        font-size: 1rem;
+      }
+      .comment-img {
+        display: grid;
+        justify-items: center;
+        > img {
+          width: 80%;
+          max-height: 25vh;
+          object-fit: contain;
+        }
+      }
+      .comment-bar {
+        .bar {
+          position: relative;
+          width: 90%;
+          display: grid;
+          grid-template-columns: auto auto;
+          height: 50%;
+          justify-content: center;
+          img {
+            margin-left: 2.2vw;
+            height: 1.8vh;
+          }
+          span {
+            font-size: 0.8rem;
+            margin-left: 1vw;
+          }
+          .icon-div {
+            display: inline;
+            height: 100%;
+          }
+          .new {
+     
+            left: 3.5vw;
+          }
+        }
+      }
+    }
+    .nest-commnet {
+      margin-left: -10vw;
+    }
+  }
+}
+}
 </style>

@@ -3,7 +3,7 @@
     <div class="top">
       <img :src="user.url" alt="" />
       <div v-if="ifuser" class="button">
-        <button-follow-card :user_id="user.id"/>
+        <!-- <button-follow-card :user_id="user.id"/> -->
         <button-new-message :chatWith="user" />
       </div>
     </div>
@@ -19,10 +19,10 @@
 <script>
 import axios from "axios";
 import buttonNewMessage from "./buttonNewMessage.vue";
-import ButtonFollowCard from "./buttonFollowCard.vue";
+// import ButtonFollowCard from "./buttonFollowCard.vue";
 import cookies from "vue-cookies";
 export default {
-  components: { buttonNewMessage, ButtonFollowCard },
+  components: { buttonNewMessage,  },
   data() {
     return {
       user: {},
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     getUser() {
-      console.log(this.tweet);
+      // console.log(this.tweet);
       axios
         .request({
           url: "https://ltweet.tk/api/users",
@@ -68,7 +68,7 @@ export default {
     if(this.tweet.user_id != cookies.get('user').user_id){
       this.ifuser = true
     }
-    console.log(this.user)
+    // console.log(this.user)
   },
 
 };
@@ -105,5 +105,19 @@ export default {
       margin-left: 20px;
     }
   }
+}
+@media only screen and (min-width: 1280px) {
+.card {
+
+  .top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    img {
+      width: 4vw;
+      height: 4vw;
+      border-radius: 50%;
+    }
+  }
+}
 }
 </style>

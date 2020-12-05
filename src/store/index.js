@@ -36,7 +36,7 @@ export default new Vuex.Store({
             return num;
         },
         NewAtUsers: state => {
-            console.log(state.AtUsers)
+            // console.log(state.AtUsers)
             let num = 0;
             for (let i = 0; i < state.AtUsers.length; i++) {
                 if (state.AtUsers[i].atNotice == "1") {
@@ -62,7 +62,7 @@ export default new Vuex.Store({
         },
         newFollower: function(state) {
             for (let i = 0; i < state.userfollowers.length; i++) {
-                console.log(state.userfollowers[i])
+                // console.log(state.userfollowers[i])
                 if (state.userfollowers[i].notice == 1) {
                     return true
                 }

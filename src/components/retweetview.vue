@@ -80,6 +80,9 @@ export default {
       border-radius: 50%;
     }
   }
+  .retweetarea{
+    margin-left: 5%;
+    width: 85%;
   .tweet-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -109,6 +112,60 @@ export default {
         width: 30vw;
         max-height: 20vw;
         object-fit: contain;
+      }
+    }
+  }
+  }
+}
+@media only screen and (min-width: 1280px) {
+  #retweet {
+    // box-sizing: border-box;
+    // width: 100%;
+    // display: grid;
+    grid-template-columns: 1fr 4fr;
+    // border: 2px solid #f5f5f5;
+    // border-radius: 10px;
+    // padding: 1vw;
+    .userimg {
+      width: 90%;
+      // justify-self: center;
+      > img {
+        width: 3vw;
+        height: 3vw;
+        // border-r
+      }
+    }
+    .tweet-top {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      border-bottom: 1px solid #f5f5f5;
+      .reusername {
+        font-size: 0.9rem;
+        font-family: "Catamaran", sans-serif;
+      }
+      .retweet-time {
+        width: 70%;
+        text-align: right;
+        font-size: 0.6rem;
+        font-family: "Lora", serif;
+      }
+    }
+    .retweet-content {
+      margin-top: 1vh;
+      .retweet-text {
+        font-size: 0.9rem;
+        font-family: "Catamaran", sans-serif;
+      }
+      .retweet-img {
+        width: 90%;
+        margin-left: 5%;
+        > img {
+          width: 30vw;
+          max-height: 20vw;
+          object-fit: contain;
+        }
       }
     }
   }

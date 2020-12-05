@@ -87,4 +87,28 @@ button {
   position: relative;
   left: 35vw;
 }
+@media only screen and (min-width: 1280px) {
+  #edit {
+  width: 90%;
+  margin-left: 5%;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  > img {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+  }
+  #area {
+    position: relative;
+    textarea{
+      width: 100%;
+    };
+  }
+}
+button {
+  font-size: 0.7rem;
+  position: relative;
+  left: 18vw;
+}
+}
 </style>

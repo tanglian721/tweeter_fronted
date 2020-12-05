@@ -25,10 +25,10 @@
             />
             <br />
             <div id="url-input">
-              <br>
+              <br />
               <span>URL: </span><input type="text" v-model="url" />
             </div>
-            <br>
+            <br />
             <img class="prewiew" v-if="url" :src="url" />
           </div>
           <div class="hash" v-if="hashtagdisplay">
@@ -113,8 +113,8 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response)
-          this.url = "https://ltweet.tk/img/"+file.name;
+          console.log(response);
+          this.url = "https://ltweet.tk/img/" + file.name;
         });
     },
     createTweet() {
@@ -128,8 +128,8 @@ export default {
           data: {
             loginToken: cookies.get("loginToken"),
             content: this.textContent,
-            image:this.url,
-            retweetId:this.$store.state.newRetweet.id
+            image: this.url,
+            retweetId: this.$store.state.newRetweet.id,
           },
         })
         .then((response) => {
@@ -144,7 +144,7 @@ export default {
             this.createAt(response.data.id);
           }
           this.$store.state.ifnew = false;
-          this.$store.state.newRetweet=""
+          this.$store.state.newRetweet = "";
         })
         .catch((errorMessage) => {
           this.submit = false;
@@ -261,7 +261,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.26);
+  // background-color: rgba(0, 0, 0, 0.26);
   display: grid;
   align-items: center;
   justify-items: center;
@@ -294,8 +294,8 @@ export default {
         width: 90%;
         height: 15vh;
       }
-      .img-area{
-        .prewiew{
+      .img-area {
+        .prewiew {
           width: 50%;
           max-height: 30vh;
           object-fit: contain;
@@ -303,6 +303,58 @@ export default {
       }
       .hash {
         height: auto;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .new-tweet {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.26);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    .bg {
+      box-sizing: border-box;
+      width: 50%;
+      min-height: 30vh;
+      background-color: #fff;
+      border-radius: 30px;
+      z-index: 99;
+      padding-bottom: 5%;
+      filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.788));
+      #delete {
+        width: 2vw;
+        position: relative;
+        margin: 2vh 5vw 1vh 5vw;
+      }
+      #edit {
+        width: 90%;
+        margin-left: 5%;
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        > img {
+          width: 4vw;
+          height: 4vw;
+          border-radius: 50%;
+        }
+        #text-area {
+          border: 1px solid black;
+          width: 90%;
+          height: 15vh;
+        }
+        .img-area {
+          .prewiew {
+            width: 50%;
+            max-height: 30vh;
+            object-fit: contain;
+          }
+        }
+        .hash {
+          height: auto;
+        }
       }
     }
   }

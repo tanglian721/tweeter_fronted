@@ -11,7 +11,9 @@
     </div>
     <div>
       <img id="message" src="../assets/message.png" alt="" @click="message" />
-      <div id="new" v-if="this.$store.getters.newChat>0">{{ this.$store.getters.newChat }}</div>
+      <div id="new" v-if="this.$store.getters.newChat > 0">
+        {{ this.$store.getters.newChat }}
+      </div>
     </div>
     <div id="at" @click="atUser">
       <img src="../assets/at.png" alt="" />
@@ -34,23 +36,17 @@ export default {
   name: "bottom-bar",
   data() {
     return {
-      newNumber: this.$store.getters.NewAtUsers,
+      // newNumber: this.$store.getters.NewAtUsers,
       topicDisplay: "",
     };
   },
   methods: {
     home() {
-      // this.$store.commit("createHide");
-      // if (screen.width > 760) {
-      //   this.$store.commit("infoShow");
-      // } else {
-      //   this.$store.commit("infoHide");
-      // }
       if (this.$router.history.current.path != "/") {
         this.$router.push("/");
       }
       this.$store.state.homepageContentShift = "default";
-      console.log(this.$store.state.homepageContentShift)
+      console.log(this.$store.state.homepageContentShift);
       this.$store.state.newbtn = true;
     },
     userFollow() {
@@ -71,6 +67,11 @@ export default {
     },
     toall() {},
   },
+  computed: {
+    newNumber() {
+     return this.$store.getters.NewAtUsers
+    },
+  },
   mounted() {
     console.log(this.newNumber);
   },
@@ -85,7 +86,7 @@ export default {
   grid-template-columns: 1fr 1.5fr 1.5fr 1fr;
   align-items: center;
   justify-items: center;
-  >div{
+  > div {
     position: relative;
   }
   img {
@@ -101,10 +102,10 @@ export default {
       top: -2vh;
     }
   }
-  #new{
+  #new {
     position: absolute;
     color: crimson;
-    right:-1vh;
+    right: -1vh;
     top: -1vh;
     font-weight: bolder;
   }

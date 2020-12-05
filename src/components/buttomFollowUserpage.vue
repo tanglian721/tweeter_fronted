@@ -11,8 +11,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      userfollows: this.$store.state.userfollows,
-      iffollow: this.followbtn,
+      // userfollows: this.$store.state.userfollows,
+      iffollow: false,
       locationUserId: this.$router.history.current.params.pathMatch,
       userId:cookies.get('user').user_id
     };
@@ -20,8 +20,11 @@ export default {
 
   methods: {
     followCheck() {
+      console.log(this.iffollow)
+      console.log(this.userfollows)
       for (let i = 0; i < this.userfollows.length; i++) {
         if (this.locationUserId == this.userfollows[i].following_id) {
+          console.log(this.userfollows[i])
           this.iffollow = true;
           return;
         }
@@ -71,13 +74,9 @@ export default {
     },
   },
   computed: {
-      btnShow() {
-          if ( this.locationUserId == this.userId ){
-              return true 
-          }else {
-              return false
-          }
-      }
+     userfollows(){
+       return this.$store.state.userfollows
+     } 
   },
   mounted () {
       this.followCheck();

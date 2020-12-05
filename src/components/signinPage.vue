@@ -9,7 +9,7 @@
         <img src="../assets/enter.png" @click="loginUser" />
         <img src="../assets/signUp.png" @click="signUpForm" />
       </div>
-      <facebook-logini />
+      <!-- <facebook-logini /> -->
       <h3>{{ loginStatus }}</h3>
     </div>
   </div>
@@ -19,9 +19,9 @@
 <script>
 import cookies from "vue-cookies"
 import axios from "axios"
-import facebookLogini from './facebookLogini.vue';
+// import facebookLogini from './facebookLogini.vue';
 export default {
-  components: { facebookLogini },
+  // components: { facebookLogini },
   name: "signin-page",
   data() {
       return {
