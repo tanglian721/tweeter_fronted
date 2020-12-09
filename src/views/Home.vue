@@ -14,7 +14,6 @@
         <default-list
           id="scroll"
           v-if="$store.state.homepageContentShift == 'default'"
-          @mousewheel="ssss"
         />
         <message-view
           v-else-if="$store.state.homepageContentShift == 'message'"
@@ -23,9 +22,18 @@
         <hash-tag-list
           v-else-if="$store.state.homepageContentShift == 'hash'"
         />
-        <img v-if="loading_bottom" src="../assets/loading.gif" alt="" />
+        <div v-if="$store.state.homepageContentShift == 'default'">
+          <img
+            v-if="loading_bottom"
+            ref="test"
+            v-show="show"
+            v-observe-visibility="visibilityChanged"
+            src="../assets/loading.gif"
+            alt=""
+          />
+          <h2 v-else>No more tweets!</h2>
+        </div>
       </div>
-      <!-- <tweets-like-sorting v-else-if="$store.state.homepageContentShift == 'byLike'" /> -->
       <div class="right desktop">
         <hash-tag-list />
         <message-view />
@@ -39,7 +47,6 @@
       </transition>
       <button-newtweet v-if="this.$store.state.newbtn" />
     </div>
-    <!-- <div v-else class="unlogin">login</div> -->
   </div>
 </template>
 
@@ -55,7 +62,9 @@ import UserInfo from "../components/userInfo.vue";
 import MessageView from "../components/messageView.vue";
 import AtUser from "../components/atUser";
 import HashTagList from "../components/hashTagList.vue";
-// import TweetsLikeSorting from '../components/tweetsLikeSorting.vue';
+import VueObserveVisibility from "vue-observe-visibility";
+import Vue from "vue";
+Vue.use(VueObserveVisibility);
 export default {
   name: "Home",
   data() {
@@ -64,7 +73,9 @@ export default {
       ifLoading: true,
       user: cookies.get("user"),
       loading_top: false,
-      loading_bottom: false,
+      loading_bottom: true,
+      show: true,
+      isVisible: true,
     };
   },
   components: {
@@ -80,6 +91,10 @@ export default {
     // TweetsLikeSorting,
   },
   methods: {
+    visibilityChanged(isVisible) {
+      this.isVisible = isVisible;
+      this.loadMore();
+    },
     refresh() {
       this.getTweets();
     },
@@ -128,7 +143,6 @@ export default {
             setTimeout(() => {
               this.ifLoading = true;
             }, 1000);
-            this.loading_bottom = false;
           }
         })
         .catch((error) => {
@@ -236,9 +250,18 @@ export default {
           console.log(error);
         });
     },
-    ssss(event) {
+    handleWheel() {
       console.log("aa");
-      console.log(event);
+      window.addEventListener("wheel", function (event) {
+        if (event.deltaY < 0) {
+          console.log("scrolling up");
+        } else if (event.deltaY > 0) {
+          console.log("scrolling down");
+        }
+      });
+    },
+    load() {
+      console.log("a");
     },
   },
   computed: {
@@ -258,32 +281,24 @@ export default {
     this.getAtUserTweet();
     this.getHashList();
     this.getUsers();
-    // let div1 = document.body;
-    //   div1.addEventListener("wheel", () => {
-    //     console.log(div1.scrollHeight)
-    //     console.log(div1.scrollTop)
-    //     console.log(div1.offsetTop)
-    //   })
-
-    if (this.$store.state.homepageContentShift == "default") {
-      let div = document.getElementById("body");
-      div.addEventListener("wheel", () => {
-        // console.log(div.scrollHeight)
-        // console.log(div.scrollTop)
-        // console.log(div.offsetTop)
-        if (div.scrollHeight <= div.scrollTop + div.offsetTop * 9) {
-          if (this.ifLoading == true) {
-            this.loadMore();
-          }
-        }
-      });
-    }
+    // if (this.$store.state.homepageContentShift == "default") {
+    //   let div = document.getElementById("body");
+    //   div.addEventListener("scroll", () => {
+    //     console.log(div.scrollHeight);
+    //     console.log(div.scrollTop);
+    //     console.log(div.offsetTop);
+    //     if (div.scrollHeight <= div.scrollTop + div.offsetTop * 10) {
+    //       if (this.ifLoading == true) {
+    //         this.loadMore();
+    //       }
+    //     }
+    //   });
+    // }
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
 #homepage {
   box-sizing: border-box;
   width: 100vw;
@@ -337,13 +352,10 @@ export default {
     }
   }
   .desktop {
-  display: none;
-}
-}
-@media only screen and (min-width: 1280px) {
-  .mobile {
     display: none;
   }
+}
+@media only screen and (min-width: 1280px) {
   #homepage {
     box-sizing: border-box;
     width: 100vw;
@@ -367,26 +379,28 @@ export default {
         > img {
           height: 10vh;
         }
-          .default-list,
-          .at-user,
-          .hash,
-          .message,
-          .tweet-sort-like {
-            box-sizing: border-box;
-            width: 100%;
-            overflow-x: hidden;
-          }
+        .default-list,
+        .at-user,
+        .hash,
+        .message,
+        .tweet-sort-like {
+          box-sizing: border-box;
+          width: 100%;
+          // overflow-x: hidden;
+        }
       }
     }
-     .desktop{
-    display: block;
+    .desktop {
+      display: block;
+    }
+    .right {
+      height: 100vh;
+      display: grid;
+      grid-template-rows: 2fr 3fr;
+    }
+    .mobile {
+      display: none;
+    }
   }
-  }
- 
 }
-.right {
-  display: grid;
-  grid-template-rows: 2fr 3fr;
-}
-
 </style>

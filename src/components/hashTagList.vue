@@ -48,6 +48,7 @@ export default {
     text-align: center;
     margin: 2vh;
     font-size: 2rem;
+    width: 80vw;
   }
   .hashlist {
     display: grid;
@@ -56,7 +57,8 @@ export default {
     margin-left: 10%;
     .fire {
       display: grid;
-      row-gap: 1vh;
+      row-gap: 3vh;
+      height: 4vh;
       .icon {
         box-sizing: border-box;
         height: 4vh;
@@ -65,6 +67,7 @@ export default {
     .hashtags {
       display: grid;
       row-gap: 1vh;
+      height: 4vh;
     }
   }
 }
@@ -72,6 +75,7 @@ export default {
   .hash {
     h2 {
       font-size: 1.5rem;
+      width: 80%;
     }
     .hashlist {
       .fire {

@@ -67,6 +67,14 @@ export default {
   height: 4vh;
   position: fixed;
   bottom: 2vh;
+  // >input{
+  //   width: 18vw;
+  // }
+  button{
+    position: relative;
+    left: 0;
+    top: 0;
+  }
  
 }
 }

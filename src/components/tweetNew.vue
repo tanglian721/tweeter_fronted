@@ -312,7 +312,7 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.26);
+    background-color: none;
     display: grid;
     align-items: center;
     justify-items: center;

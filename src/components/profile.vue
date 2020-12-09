@@ -80,6 +80,11 @@ export default {
     };
   },
   methods: {
+    back(){
+      console.log("1")
+      this. deleteShow=false
+      console.log(this.deleteshow)
+    },
     ifedit() {
       console.log(this.edit);
       this.edit = !this.edit;
@@ -145,10 +150,11 @@ export default {
         })
         .then((response) => {
           console.log(response.data);
+          this.$router.push("/login");
           cookies.remove("user");
           cookies.remove("loginToken");
-          this.$router.push("/login");
-          this.deleteFalse == "success";
+          console.log("1")
+          location.reload();
         })
         .catch((error) => {
           console.log(error);

@@ -110,7 +110,7 @@ export default {
 
 <style lang="scss" scoped>
 .message {
-  width: 90%;
+  width: 100%;
   margin-left: 5%;
   h2 {
     text-align: center;
@@ -142,15 +142,49 @@ export default {
       
     }
     .new-message {
-      width: 80%;
+      width: 90%;
       margin-left: 3vw;
     }
   }
 }
 @media only screen and (min-width: 1280px) {
-  .new-message {
-      width: 25vw;
+ .message {
+  width: 100%;
+  margin-left: 5%;
+  h2 {
+    text-align: center;
+    margin: 2vh 0;
+    text-transform: uppercase;
+  }
+  .usersMessage {
+    width: 90%;
+    position: relative;
+    #chatname {
+      height: 1.5rem;
+      margin: 1.5vw;
+      #messageName {
+        font-size: 1.5rem;
+        font-family: "Catamaran", sans-serif;
+        margin-left: 2vw;
+        line-height: 8vh;
+      }
+      > img {
+        height: 50%;
+      }
+    }
+    .chat-area{
+      margin-top: 5vh;
+      margin-left: 2vw;
+      height: 40vh;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      
+    }
+    .new-message {
+      width: 22vw;
       margin-left: 3vw;
     }
+  }
+}
 }
 </style>

@@ -95,11 +95,11 @@ export default {
   #at {
     position: relative;
     #number {
-      font-size: 2rem;
+      font-size: 1rem;
       color: red;
       position: absolute;
       right: -1vw;
-      top: -2vh;
+      top: -1vh;
     }
   }
   #new {

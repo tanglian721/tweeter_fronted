@@ -109,7 +109,7 @@ export default {
       width: 90%;
       margin-left: 5%;
       > img {
-        width: 30vw;
+        width: 100%;
         max-height: 20vw;
         object-fit: contain;
       }
@@ -162,7 +162,7 @@ export default {
         width: 90%;
         margin-left: 5%;
         > img {
-          width: 30vw;
+          width: 15vw;
           max-height: 20vw;
           object-fit: contain;
         }

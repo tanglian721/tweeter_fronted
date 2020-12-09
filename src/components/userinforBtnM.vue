@@ -35,9 +35,9 @@ export default {
     topic(){
       if (this.$router.history.current.path != "/") {
         this.$router.push("/");
-        this.$store.state.homepageContentShift = 'byLike'
+        this.$store.state.homepageContentShift = 'hash'
       } else {
-        this.$store.state.homepageContentShift = 'byLike'
+        this.$store.state.homepageContentShift = 'hash'
       }
     }
   },

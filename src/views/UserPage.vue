@@ -260,9 +260,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.desktop{
-  display: none;
-}
+
 .user-page {
   position: fixed;
   height: 100vh;
@@ -368,10 +366,13 @@ export default {
       border-radius: 1rem;
       padding: 5px;
       position: absolute;
-      top: 22vh;
+      top: 20vh;
       right: 5vw;
     }
   }
+}
+.desktop{
+  display: none;
 }
 @media only screen and (min-width: 1280px) {
   .mobile {
@@ -485,7 +486,6 @@ export default {
       }
     }
   }
-}
 .right {
   height: 98vh;
   width: 100%;
@@ -506,5 +506,7 @@ export default {
   overflow-x: hidden;
 
   }
+
+}
 }
 </style>

@@ -31,6 +31,7 @@ export default {
       }
     },
     followUser() {
+      console.log("follow")
       axios
         .request({
           url: "https://ltweet.tk/api/follows",
@@ -52,6 +53,7 @@ export default {
         });
     },
     unfollowUser() {
+      console.log("unfollow")
       axios
         .request({
           url: "https://ltweet.tk/api/follows",
@@ -85,4 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.button{
+  z-index: 100;
+}
 </style>
